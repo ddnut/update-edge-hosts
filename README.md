@@ -43,3 +43,9 @@ usage
     */30 * * * * /usr/local/sbin/update-hosts.sh -q -u && service dnsmasq restart >/dev/null
 
 ...you should figure out a sane cron interval. Ideally we'd detect if there was a change, but that is not implemented.
+
+todo
+----
+
+* This script is far too chatty
+* Detect changes somehow?
