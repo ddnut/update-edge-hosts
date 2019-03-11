@@ -12,7 +12,7 @@ Add this script to cron on the EdgeRouter to "fix" this enough to stop caring ab
 installation
 ============
 
-    root@ubnt:~# curl https://<url-to-script>.sh -O /usr/local/sbin/update-hosts.sh && \
+    root@ubnt:~# curl https://raw.githubusercontent.com/epleterte/update-edge-hosts/master/update-hosts.sh -O /usr/local/sbin/update-hosts.sh && \
                    chmod +x /usr/local/sbin/update-hosts.sh
 
 usage
