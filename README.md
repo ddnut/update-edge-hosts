@@ -1,4 +1,4 @@
-update-edge-hosts
+update-edge-hosts :globe_with_meridians:
 =================
 
 By default, EdgeOS comes with _dhcpd_ for DHCP (rather than i.e. _dnsmasq_).
