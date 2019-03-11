@@ -39,6 +39,7 @@ This script will prompt for a sudo password.
 Usage: ${0} [-hdq]
   -h    This helpful text
   -d    Delete entries previosly added.
+  -u    Update/add entries.
   -q    Quiet - only print errors.
 
 Examples:
