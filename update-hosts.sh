@@ -105,9 +105,9 @@ delete_entries_found
 
 p_info "Adding new entries!"
 
-echo "### DHCPCLIENT START ###" | sudo tee -a "${hosts_file}" >/dev/null
+echo "### DHCPCLIENT BEGIN ###" | sudo tee -a "${hosts_file}" >/dev/null
 #show dhcp leases | sed 1,2d | awk '{ print $1" "$NF }' | sudo tee -a "${hosts_file}" >/dev/null
-/usr/sbin/ubnt-dhcp print-leases | sed 1,2d | awk '{ print $1" "$NF }' | sudo tee -a "${hosts_file}" >/dev/null
+/usr/sbin/ubnt-dhcp print-leases | sed 1,2d | awk '{ if ($6) print $1" "$6 }' | sudo tee -a "${hosts_file}" >/dev/null
 echo "### DHCPCLIENT END ###" | sudo tee -a "${hosts_file}" >/dev/null
 
 p_info "Allright. I hope this went well. Happy resolving!"
