@@ -1,5 +1,5 @@
 #!/bin/bash -ue
-# Christian Bryn <chr.bryn@gmail.com> 2018
+# Christian Bryn <chr.bryn@gmail.com> 2018-2019
 # read dhcp client lease names and safely appends to /etc/hosts
 # requires sudo/root privileges
 #
@@ -66,7 +66,6 @@ function p_info {
 function delete_entries_found {
   if ( egrep -q "^### DHCPCLIENT BEGIN ###$" "${hosts_file}" )
   then
-    #p_info "ZERODATA BEGIN marker found."
     if ( ! egrep -q "^### DHCPCLIENT END ###$" "${hosts_file}" )
     then
       p_err "You have a 'DHCPCLIENT BEGIN' marker in your hosts file, but no 'DHCPCLIENT END' marker - bogus, man! Please fix to continue."
