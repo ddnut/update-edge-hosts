@@ -10,13 +10,13 @@ This script is the horrible middle ground - since dnsmasq automatically reads _/
 Add this script to cron on the EdgeRouter to "fix" this enough to stop caring about a proper solution.
 
 installation
-============
+------------
 
     root@ubnt:~# curl https://raw.githubusercontent.com/epleterte/update-edge-hosts/master/update-hosts.sh -O /usr/local/sbin/update-hosts.sh && \
                    chmod +x /usr/local/sbin/update-hosts.sh
 
 usage
-=====
+-----
 
     $ ./update-hosts.sh -h
     Safely append dhcp client lease names to /etc/hosts
@@ -33,14 +33,12 @@ usage
       # run from cron - requires root privilegies / passwordless sudo
       ./update-hosts.sh -q
 
-Run it manually
----------------
+### Run it manually
 
     root@ubnt:~# /usr/local/sbin/update-hosts.sh -u
     root@ubnt:~# service dnsmasq restart
 
-Run it in cron (as root)
-------------------------
+### Run it in cron (as root)
 
     */30 * * * * /usr/local/sbin/update-hosts.sh -q -u && service dnsmasq restart >/dev/null
 
