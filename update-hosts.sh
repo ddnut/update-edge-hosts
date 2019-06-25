@@ -14,6 +14,7 @@
 
 ## config
 hosts_file="/etc/hosts"
+domain=""
 
 ## flags
 quiet="false"
@@ -39,6 +40,7 @@ This script will prompt for a sudo password.
 Usage: ${0} [-hdq]
   -h    This helpful text
   -d    Delete entries previosly added.
+  -D    Set domain (optional).
   -u    Update/add entries.
   -q    Quiet - only print errors.
 
@@ -78,13 +80,15 @@ function delete_entries_found {
   fi
 }
 
-while getopts hduqz o
+while getopts hdD:uqz o
 do
   case $o in
     h)
       print_usage ; exit ;;
     d)
       delete_entries_found ; exit ;;
+    D)
+      domain="$OPTARG" ;;
     u)
       update="true" ;;
     q)
@@ -106,7 +110,7 @@ p_info "Adding new entries!"
 
 echo "### DHCPCLIENT BEGIN ###" | sudo tee -a "${hosts_file}" >/dev/null
 #show dhcp leases | sed 1,2d | awk '{ print $1" "$NF }' | sudo tee -a "${hosts_file}" >/dev/null
-/usr/sbin/ubnt-dhcp print-leases | sed 1,2d | awk '{ if ($6) print $1" "$6 }' | sudo tee -a "${hosts_file}" >/dev/null
+/usr/sbin/ubnt-dhcp print-leases | sed 1,2d | awk -vd="${domain:-}" '$6 { printf $1 ; if (d) printf " "$6d; print " "$6 }' | sudo tee -a "${hosts_file}" >/dev/null
 echo "### DHCPCLIENT END ###" | sudo tee -a "${hosts_file}" >/dev/null
 
 p_info "Allright. I hope this went well. Happy resolving!"
